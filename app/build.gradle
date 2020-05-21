@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.nabinbhandari.android:permissions:3.8'
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'
     implementation project(path: ':bildbekommen')
+    //implementation 'com.github.J-Neutron:BildBekommen:0.1.0'
 }

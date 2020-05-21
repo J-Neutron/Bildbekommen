@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -52,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements ItemSelectedListe
     private boolean album_exists = false;
     private KProgressHUD kProgressHUD;
     private RelativeLayout main_layout;
+    Activity activitys;
+
+    public MainActivity(Activity activity) {
+        activitys = activity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements ItemSelectedListe
             @Override
             public void onClick(View view) {
                 if (Bildbekommen.main_list != null && Bildbekommen.main_list.size() != 0) {
-                    Intent i = new Intent(MainActivity.this, Bildbekommen.activitys.getClass());
+                    Intent i = new Intent(MainActivity.this, activitys.getClass());
                     i.putStringArrayListExtra("album_images_layout", Bildbekommen.main_list);
                     setResult(RESULT_OK, i);
                     finish();
@@ -124,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements ItemSelectedListe
             @Override
             public void onDenied(Context context, ArrayList<String> deniedPermissions) {
                 main_layout.setVisibility(View.GONE);
-                Intent i = new Intent(MainActivity.this, Bildbekommen.activitys.getClass());
+                Intent i = new Intent(MainActivity.this, activitys.getClass());
                 startActivity(i);
                 finish();
             }
@@ -239,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements ItemSelectedListe
 
             } else {
                 main_layout.setVisibility(View.GONE);
-                Intent i = new Intent(MainActivity.this, Bildbekommen.activitys.getClass());
+                Intent i = new Intent(MainActivity.this, activitys.getClass());
                 startActivity(i);
                 finish();
                 album_exists = false;
@@ -330,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements ItemSelectedListe
         {
             Bildbekommen.main_list.add(main_list_copy.get(j));
         }
-        Intent i = new Intent(MainActivity.this, Bildbekommen.activitys.getClass());
+        Intent i = new Intent(MainActivity.this, activitys.getClass());
         i.putStringArrayListExtra("album_images_layout", main_list_copy);
         setResult(RESULT_OK, i);
         finish();
